@@ -1,0 +1,41 @@
+# Render Blueprint — déploiement en 1 clic du bot Verity.
+# Quand le contenu de src/backend/ est poussé à la racine d'un dépôt GitHub,
+# Render détecte ce fichier : "New → Blueprint" pré-remplit tout.
+# Les valeurs marquées sync:false sont à renseigner dans le dashboard Render
+# (jamais dans ce fichier, jamais dans Perchance).
+services:
+  - type: web
+    name: verity-discord-bot
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: DISCORD_APP_ID
+        sync: false
+      - key: ALLOWED_CHANNELS
+        value: ""
+      - key: WEBHOOK_URL
+        sync: false
+      - key: BOT_NAME
+        value: Verity
+      - key: AVATAR_URL
+        value: ""
+      - key: AI_BASE_URL
+        value: https://api.openai.com/v1
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: gpt-4o-mini
+      - key: AI_TEMPERATURE
+        value: "0.7"
+      - key: AI_MAX_CHARS
+        value: "1500"
+      - key: RETENTION_DAYS
+        value: "90"
+      - key: IGNORE_BOTS
+        value: "true"
+      - key: AUTO_MODE
+        value: "false"
